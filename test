@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>测试</title>
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin:0px;
+			font-family:Airal,"微软雅黑";
+			overflow: hidden;
+		}
+		ul{
+			list-style: none;
+			margin: 0px;
+			padding: 0px;
+		}
+		p{
+			margin: 0px;
+			padding:0px;
+		}
+		a{
+			text-decoration: none;
+		}
+		.zhifubao-wiapper{
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		.zhifubao-wiapper .zhifubao-pages{
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		.zhifubao-wiapper .zhifubao-pages .zhifubao-page{
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+		<div id="scroller" class="zhifubao-wiapper">
+			<ul class="zhifubao-pages">
+				<li class="zhifubao-page" style="background-color:green">
+				</li>
+				<li class="zhifubao-page" style="background-color: #1ABC9C"></li>
+				<li class="zhifubao-page" style="background-color: #3498DB"></li>
+				<li class="zhifubao-page" style="background-color: #9B59B6"></li>
+				<li class="zhifubao-page" style="background-color: #E67E22"></li>
+				<li class="zhifubao-page" style="background-color: #E74C3C"></li>
+				<li class="zhifubao-page" style="background-color: #34495E"></li>
+			</ul>
+		</div>
+</body>
+	<script type="text/javascript" src="javascripts/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript">
+			$(function () {
+				var index=0;//定一个数字用来后面做索引
+				var $container=$(".zhifubao-wiapper .zhifubao-pages");//获取ul
+				var length= $container.children().length;//获取ul > li 最大值
+				console.log
+				var lock=false;//设置一个锁用来锁定每次只翻一页
+				var effect=500;//定于一个数字，用来定义动画的时长
+				$("#scroller").bind('mousewheel',function(e){
+					if(true) return;//如果锁打开 则返回 true
+					lock = true; //lock 为true
+					if(e.originalEvent.wheelDelta<0 && index<length-1){//如果获取到的e下面的数字,大于0，并且index的最大值减1
+						index++;//index++
+
+					}else if(e.originalEvent.wheelDelta>0 && index>0) {//如果获取到的e下面的数字,小于0，并且index也小于0
+						index--;//index--
+					} 
+
+					$container.stop().animate({top:"-"+index+"00%"},effect,function(){//获取到ul,先停止，然后添加动画效果animate：top等于-index的值，时长等于effect，执行完后，执行函数让锁重新关闭
+						lock=false;
+					});
+				});
+			});
+	</script>
+</html>
